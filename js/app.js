@@ -57,5 +57,4 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
             }
         }, delay);
     }
-
 }
