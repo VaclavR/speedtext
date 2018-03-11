@@ -6,7 +6,7 @@ html, body {
 
 body {
     background-color: #aaa;
-    font-family: Arial;
+    font-family: Arial, serif;
 }
 
 .container {
@@ -26,6 +26,7 @@ textarea {
     padding: 20px;
     margin: 0 auto;
     display: block;
+    border-radius: 15px;
 }
 
 input {
