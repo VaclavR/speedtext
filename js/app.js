@@ -7,7 +7,6 @@ const speedTextEl = document.querySelector('.speed-text-container');
 const overlay = document.querySelector('.overlay');
 var text;
 
-
 textArea.addEventListener('input', function () {
     showStatistic();
 });
@@ -20,15 +19,17 @@ button.addEventListener('click', function() {
     text = textArea.value.replace(/(\r\n\t|\n|\r\t)/gm,' ').split(' ');
     speedTextEl.classList.remove('hide');
     overlay.classList.remove('hide');
-    const pause = function () {
-        alert('Press any key to continue...');
+    const pause = function (ev) {
+        console.log(ev);
+        if (ev.keyCode === 80) {
+            alert('Press any key to continue...');
+        }
     };
     document.body.addEventListener('keydown', pause);
     runSpeedText(text.length + 1, text, numberInput.value, speedTextEl);
-    console.log('calculated time ',  (text.length + 1) * numberInput.value * 0.001 + 's');
     setTimeout(function() {
         document.body.removeEventListener('keydown', pause);
-    }, text.length * numberInput.value)
+    }, (text.length + 1) * numberInput.value)
 });
 
 function showStatistic () {
@@ -69,7 +70,7 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
                 display.innerText = text[index];
             }
             if (--iterations) {          // If iterations > 0, keep going
-                runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage, listener);       // Call the loop again, and pass it the current value of iterations
+                runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage);       // Call the loop again, and pass it the current value of iterations
             } else {
                 speedTextEl.innerText = '';
                 speedTextEl.classList.add('hide');
