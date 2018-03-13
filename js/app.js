@@ -16,12 +16,12 @@ numberInput.addEventListener('input', function () {
 });
 
 button.addEventListener('click', function() {
+    button.blur();
     text = textArea.value.replace(/(\r\n\t|\n|\r\t)/gm,' ').split(' ');
     speedTextEl.classList.remove('hide');
     overlay.classList.remove('hide');
     const pause = function (ev) {
-        console.log(ev);
-        if (ev.keyCode === 80) {
+        if (ev.keyCode === 32) {
             alert('Press any key to continue...');
         }
     };
