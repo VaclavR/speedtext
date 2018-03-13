@@ -27,6 +27,7 @@ textarea {
     margin: 0 auto;
     display: block;
     border-radius: 15px;
+    background-color: #fff;
 }
 
 textarea:focus {
@@ -41,6 +42,15 @@ input {
     border-radius: 5px;
     display: block;
     width: 40px;
+}
+
+.info {
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    color: aliceblue;
 }
 
 .buttons {

@@ -1,27 +1,41 @@
-const textArea = document.querySelector("textarea");
-const numberInput = document.querySelector("input");
+const textArea = document.querySelector('textarea');
+const numberInput = document.querySelector('input');
+const words = document.querySelector('.words');
+const time = document.querySelector('.time');
 const button = document.querySelector("button");
 const speedTextEl = document.querySelector('.speed-text-container');
 const overlay = document.querySelector('.overlay');
 var text;
-var startTime;
 
 
+textArea.addEventListener('input', function () {
+    showStatistic();
+});
+
+numberInput.addEventListener('input', function () {
+    showStatistic();
+});
 
 button.addEventListener('click', function() {
     text = textArea.value.replace(/(\r\n\t|\n|\r\t)/gm,' ').split(' ');
     speedTextEl.classList.remove('hide');
     overlay.classList.remove('hide');
-    startTime = new Date();
     const pause = function () {
         alert('Press any key to continue...');
     };
     document.body.addEventListener('keydown', pause);
     runSpeedText(text.length + 1, text, numberInput.value, speedTextEl);
+    console.log('calculated time ',  (text.length + 1) * numberInput.value * 0.001 + 's');
     setTimeout(function() {
         document.body.removeEventListener('keydown', pause);
     }, text.length * numberInput.value)
 });
+
+function showStatistic () {
+    text = textArea.value.replace(/(\r\n\t|\n|\r\t)/gm,' ').split(' ');
+    words.innerText = ' ' + text.length;
+    time.innerText = ' ' + Math.round((text.length + 1) * numberInput.value * 0.01) / 10 + 's';
+}
 
 function runSpeedText (iterations, text, delay, display, secretMessage, wasSecretMessage) {
     secretMessage = secretMessage || false;
@@ -57,7 +71,6 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
             if (--iterations) {          // If iterations > 0, keep going
                 runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage, listener);       // Call the loop again, and pass it the current value of iterations
             } else {
-                console.log('total reading time ' + (new Date() - startTime) + 'ms');
                 speedTextEl.innerText = '';
                 speedTextEl.classList.add('hide');
                 overlay.classList.add('hide');
