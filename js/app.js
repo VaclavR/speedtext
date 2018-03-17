@@ -79,7 +79,6 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
             } else {
                 display.innerText = text[index];
             }
-            console.log(iterations);
             if (iterations > 1) {
                 iterations--;
                 runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage);       // Call the loop again, and pass it the current value of iterations
