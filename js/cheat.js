@@ -24,5 +24,6 @@ const cheatChecker = function (ev) {
 
 function activateCheats() {
     console.log('Degreelessness mode on!');
+    document.body.removeEventListener('keydown', cheatChecker);
     secretInput.classList.remove('hide');
 }

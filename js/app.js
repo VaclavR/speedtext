@@ -6,10 +6,27 @@ const pause = function (ev) {
     }
 };
 
+function reset () {
+    textArea.value = null;
+    text = undefined;
+    showStatistic();
+}
+
+function showStatistic () {
+    processText();
+    wordsSpan.innerText = ' ' + text.length;
+    timeSpan.innerText = ' ' + Math.round((text.length) * speedInput.value * 0.01) / 10 + ' s';
+}
+
+function processText() {
+    text = textArea.value.replace(/(\n\r\t|\n|\r\t|\s\s+)/gm, ' ').split(' ');
+    if (text[text.length - 1] === '') {
+        text.splice(text.length - 1, 1);
+    }
+}
+
 function launch() {
     launchButton.blur();
-    speedTextDiv.classList.remove('hide');
-    overlayDiv.classList.remove('hide');
     processText();
     runSpeedText(text.length, text, speedInput.value, speedTextDiv, secretInput.value);
     setTimeout(function() {
@@ -17,26 +34,16 @@ function launch() {
     }, (text.length + 1) * speedInput.value)
 }
 
-function showStatistic () {
-    processText();
-    wordsSpan.innerText = ' ' + text.length;
-    timeSpan.innerText = ' ' + Math.round((text.length) * speedInput.value * 0.01) / 10 + 's';
-}
-
-function processText() {
-    text = textArea.value.replace(/(\n\r\t|\n|\r\t|\s\s+)/gm, ' ').split(' ');
-    if (text[text.length - 1] === '') {
-        console.log(text);
-        text.splice(text.length - 1, 1);
-        console.log(text);
-    }
-}
-
-function runSpeedText (iterations, text, delay, display, secretMessage, wasSecretMessage) {
+function runSpeedText (iterations, text, delay, display, secretMessage, wasLastWordSecret) {
     secretMessage = secretMessage || false;
     const index = text.length - iterations;
     if (typeof secretMessage === "boolean") {
         setTimeout(function () {
+            if(index === 0) {
+                console.time('timer');
+                speedTextDiv.classList.remove('hide');
+                overlayDiv.classList.remove('hide');
+            }
             if (index < text.length) {
                 display.innerText = text[index];
                 iterations--;
@@ -49,24 +56,28 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
             }
         }, delay);
     }
-
     else {
         setTimeout(function () {
+            if(index === 0) {
+                console.time('timer');
+                speedTextDiv.classList.remove('hide');
+                overlayDiv.classList.remove('hide');
+            }
             if (index % 42 === 0 && index > 0) {
-                if (wasSecretMessage !== true) {
+                if (wasLastWordSecret !== true) {
                     display.innerText = secretMessage;
                     iterations++;
-                    wasSecretMessage = true;
+                    wasLastWordSecret = true;
                 } else {
                     display.innerText = text[index];
-                    wasSecretMessage = false;
+                    wasLastWordSecret = false;
                 }
             } else {
                 display.innerText = text[index];
             }
             if (iterations > 1) {
                 iterations--;
-                runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage);       // Call the loop again, and pass it the current value of iterations
+                runSpeedText(iterations, text, delay, display, secretMessage, wasLastWordSecret);       // Call the loop again, and pass it the current value of iterations
             } else {
                 console.timeEnd('timer');
                 speedTextDiv.innerText = '';

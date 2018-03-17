@@ -6,10 +6,13 @@ speedInput.addEventListener('input', function () {
     showStatistic();
 });
 
+resetButton.addEventListener('click', function () {
+    reset();
+});
+
 launchButton.addEventListener('click', function() {
     document.body.addEventListener('keydown', pause);
-    console.time('timer');
     launch();
 });
 
-document.addEventListener('keydown', cheatChecker);
+document.body.addEventListener('keydown', cheatChecker);

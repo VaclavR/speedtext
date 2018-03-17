@@ -10,20 +10,12 @@ html, body {
 body {
     background-color: #aaa;
     font-family: Arial, serif;
-}
-
-.container {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 h3 {
-    color: aliceblue;
     text-transform: uppercase;
 }
 
@@ -42,45 +34,73 @@ textarea:focus {
     border-radius: 15px;
 }
 
-input[title=speed] {
+input {
     padding: 10px;
     border: none;
     border-radius: 5px;
+}
+
+input[title=speed] {
     display: block;
     width: 60px;
-    margin: 0 10px;
 }
 
 input[title=secret-word] {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
     width: 100px;
     margin: 0 10px;
+}
+
+button {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+button[title=launch] {
+    background-color: crimson;
+    color: #323232;
+}
+
+button[title=reset] {
+    background-color: deepskyblue;
+    color: #323232;
+    margin-right: 5px;
+}
+
+button:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: aliceblue;
     margin-top: 10px;
     padding: 0 5px;
 }
 
 .inputs {
-    width: 400px;
+    width: 100%;
     margin: 10px 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-button {
-    background-color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    text-transform: uppercase;
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .overlay {
@@ -95,13 +115,13 @@ button {
 }
 
 .speed-text-container {
-    width: 600px;
-    height: 600px;
+    width: 100vw;
+    max-width: 600px;
+    height: 300px;
     background-color: #c9b792;
     position: fixed;
-    top: calc(50% - 300px);
+    top: calc(50% - 150px);
     left: calc(50% - 300px);
-    margin: 0 auto;
     border: 2px solid #a38762;
     border-radius: 20px;
     box-shadow: 3px 3px 15px #414141;

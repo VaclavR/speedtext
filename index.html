@@ -11,17 +11,22 @@
 <div class="overlay hide"></div>
 
 <div class="container">
+    <h1>Speed Reader</h1>
     <h3>Paste an article</h3>
     <textarea title="article" rows="20"></textarea>
     <div class="info">
         <span>Words: <span class="words">0</span></span>
-        <span>Reading time: <span class="time">0</span></span>
+        <span>Reading time: <span class="time">0 s</span></span>
     </div>
     <div class="inputs">
-        <input title="speed" type="number" value="200">
+        <input title="speed" type="number" value="200" step="100">
         <input title="secret-word" type="password" class="hide">
+        <div class="button-container">
+            <button title="reset">Reset</button>
+            <button title="launch">Launch</button>
+        </div>
     </div>
-    <button title="launch">Launch</button>
+
 </div>
 
 <div class="speed-text-container hide"></div>

@@ -2,6 +2,7 @@ const textArea = document.querySelector('textarea');
 const speedInput = document.querySelector('input[title=speed]');
 const wordsSpan = document.querySelector('.words');
 const timeSpan = document.querySelector('.time');
+const resetButton = document.querySelector('button[title=reset]');
 const launchButton = document.querySelector('button[title=launch]');
 const speedTextDiv = document.querySelector('.speed-text-container');
 const overlayDiv = document.querySelector('.overlay');
