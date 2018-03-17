@@ -1,30 +1,21 @@
 var text;
 
-textArea.addEventListener('input', function () {
-    showStatistic();
-});
+const pause = function (ev) {
+    if (ev.keyCode === 32) {
+        alert('Press any key to continue...');
+    }
+};
 
-speedInput.addEventListener('input', function () {
-    showStatistic();
-});
-
-launchButton.addEventListener('click', function() {
+function launch() {
     launchButton.blur();
     speedTextDiv.classList.remove('hide');
     overlayDiv.classList.remove('hide');
-    const pause = function (ev) {
-        if (ev.keyCode === 32) {
-            alert('Press any key to continue...');
-        }
-    };
-    document.body.addEventListener('keydown', pause);
-    console.time('timer');
     processText();
     runSpeedText(text.length, text, speedInput.value, speedTextDiv, secretInput.value);
     setTimeout(function() {
         document.body.removeEventListener('keydown', pause);
     }, (text.length + 1) * speedInput.value)
-});
+}
 
 function showStatistic () {
     processText();
