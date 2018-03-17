@@ -1,4 +1,3 @@
-const secretInput  = document.querySelector('input[title=secret-word]');
 const cheatKeys = {
     68: 'd',
     71: 'g',
@@ -10,7 +9,7 @@ var cheatCodePosition = 0;
 
 document.addEventListener('keydown', function(e) {
     const key = cheatKeys[e.keyCode];
-    var requiredKey = cheatCode[cheatCodePosition];
+    const requiredKey = cheatCode[cheatCodePosition];
 
     if (key === requiredKey) {
 
