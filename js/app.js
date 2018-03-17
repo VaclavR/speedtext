@@ -4,15 +4,14 @@ textArea.addEventListener('input', function () {
     showStatistic();
 });
 
-numberInput.addEventListener('input', function () {
+speedInput.addEventListener('input', function () {
     showStatistic();
 });
 
-button.addEventListener('click', function() {
-    button.blur();
-    text = textArea.value.replace(/\s\s+/g, ' ').split(' ');
-    speedTextEl.classList.remove('hide');
-    overlay.classList.remove('hide');
+launchButton.addEventListener('click', function() {
+    launchButton.blur();
+    speedTextDiv.classList.remove('hide');
+    overlayDiv.classList.remove('hide');
     const pause = function (ev) {
         if (ev.keyCode === 32) {
             alert('Press any key to continue...');
@@ -20,23 +19,25 @@ button.addEventListener('click', function() {
     };
     document.body.addEventListener('keydown', pause);
     console.time('timer');
-    removeSpaceAtEnd();
-    runSpeedText(text.length, text, numberInput.value, speedTextEl, secretInput.value);
+    processText();
+    runSpeedText(text.length, text, speedInput.value, speedTextDiv, secretInput.value);
     setTimeout(function() {
         document.body.removeEventListener('keydown', pause);
-    }, (text.length + 1) * numberInput.value)
+    }, (text.length + 1) * speedInput.value)
 });
 
 function showStatistic () {
-    text = textArea.value.replace(/\s\s+/g, ' ').split(' ');
-    removeSpaceAtEnd();
-    words.innerText = ' ' + text.length;
-    time.innerText = ' ' + Math.round((text.length) * numberInput.value * 0.01) / 10 + 's';
+    processText();
+    wordsSpan.innerText = ' ' + text.length;
+    timeSpan.innerText = ' ' + Math.round((text.length) * speedInput.value * 0.01) / 10 + 's';
 }
 
-function removeSpaceAtEnd() {
+function processText() {
+    text = textArea.value.replace(/(\n\r\t|\n|\r\t|\s\s+)/gm, ' ').split(' ');
     if (text[text.length - 1] === '') {
+        console.log(text);
         text.splice(text.length - 1, 1);
+        console.log(text);
     }
 }
 
@@ -51,9 +52,9 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
                 runSpeedText(iterations, text, delay, display);
             } else {
                 console.timeEnd('timer');
-                speedTextEl.innerText = '';
-                speedTextEl.classList.add('hide');
-                overlay.classList.add('hide');
+                speedTextDiv.innerText = '';
+                speedTextDiv.classList.add('hide');
+                overlayDiv.classList.add('hide');
             }
         }, delay);
     }
@@ -77,9 +78,9 @@ function runSpeedText (iterations, text, delay, display, secretMessage, wasSecre
                 runSpeedText(iterations, text, delay, display, secretMessage, wasSecretMessage);       // Call the loop again, and pass it the current value of iterations
             } else {
                 console.timeEnd('timer');
-                speedTextEl.innerText = '';
-                speedTextEl.classList.add('hide');
-                overlay.classList.add('hide');
+                speedTextDiv.innerText = '';
+                speedTextDiv.classList.add('hide');
+                overlayDiv.classList.add('hide');
             }
         }, delay);
     }
