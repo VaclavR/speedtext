@@ -121,7 +121,6 @@ button:hover {
     background-color: #c9b792;
     position: fixed;
     top: calc(50% - 150px);
-    left: calc(50% - 300px);
     border: 2px solid #a38762;
     border-radius: 20px;
     box-shadow: 3px 3px 15px #414141;
