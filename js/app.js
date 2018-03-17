@@ -19,7 +19,7 @@ function showStatistic () {
 }
 
 function processText() {
-    text = textArea.value.replace(/(\n\r\t|\n|\r\t|\s\s+)/gm, ' ').split(' ');
+    text = textArea.value.replace(/(\n\n+\r\r+\t\t+|\n\n+|\r\r+\t\t+|\s\s+)/gm, ' ').split(' ');
     if (text[text.length - 1] === '') {
         text.splice(text.length - 1, 1);
     }
